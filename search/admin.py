@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from search.models import Thesis 
 
-@admin.register(Post)
+@admin.register(Thesis)
 class ThesisAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'authors','posted_by','publish',
                     'status')

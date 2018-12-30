@@ -1,0 +1,14 @@
+{% extends "search/base.html" %}
+    {% block title %}Detail of the Thesis{% endblock %}
+    {% block content %}
+    <h1 class="title">{{ thesis.title }}</h1>
+    <p class="date">
+        Published {{ thesis.publish }} by {{ thesis.posted_by }}
+    </p>
+    <h6 class="author">
+    	Author(s): {{ thesis.authors }}
+    </h6>
+    <p>
+        {{ thesis.abstract|linebreaks }}
+    </p>
+{% endblock %}

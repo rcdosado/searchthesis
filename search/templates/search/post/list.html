@@ -1,0 +1,17 @@
+{% extends "search/base.html" %}
+    {% block title %}Search Engine{% endblock %}
+{% block content %}
+    <h1>Search Theses</h1>
+    {% for thesis in theses %}
+        <h2>
+            <a href="{{ thesis.get_absolute_url }}">
+            {{ thesis.title }}
+            </a>
+        </h2>
+        <p class="date">
+        Published {{ thesis.publish }} by {{ thesis.posted_by }}
+        </p>
+        {{ thesis.abstract|truncatewords:30|linebreaks }}
+    {% endfor %}
+    {% include "pagination.html" with page=posts %}
+{% endblock %}

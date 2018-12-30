@@ -16,13 +16,13 @@ class Thesis(models.Model):
         ('published', 'Published'),
     )
     title = models.CharField(max_length=250)
-    authors = models.TextField()
     slug = models.SlugField(max_length=250, 
                 unique_for_date='publish')
+    abstract = models.TextField()
+    authors = models.CharField(max_length=250)
     posted_by = models.ForeignKey(User,
                 on_delete=models.CASCADE,
                 related_name='posts')
-    abstract = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -34,9 +34,10 @@ class Thesis(models.Model):
 
     class Meta:
         ordering = ('-publish',)
-
+        verbose_name_plural = "Theses"
+        
     def get_absolute_url(self):
-        return reverse('blog:post_detail',
+        return reverse('search:thesis_detail',
                         args=[self.publish.year,
                               self.publish.month,
                               self.publish.day,

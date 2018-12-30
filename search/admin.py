@@ -11,3 +11,8 @@ class ThesisAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('title',)}
     raw_id_fields = ('posted_by',)
     date_hierarchy = 'publish'
+    exclude = ('posted_by',)
+
+    def save_model(self, request, obj, form, change):
+    	obj.posted_by = request.user
+    	super().save_model(request, obj, form, change)

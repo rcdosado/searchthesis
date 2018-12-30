@@ -20,8 +20,8 @@ class Thesis(models.Model):
                 unique_for_date='publish')
     abstract = models.TextField()
     authors = models.CharField(max_length=250)
-    posted_by = models.ForeignKey(User,
-                on_delete=models.CASCADE,
+    posted_by = models.ForeignKey(User,null=True,blank=True,
+                on_delete=models.SET_NULL,
                 related_name='posts')
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
@@ -31,10 +31,12 @@ class Thesis(models.Model):
                 default='draft')
     objects = models.Manager()
     published = PublishedManager()
+    exclude = ['posted_by',]
 
     class Meta:
         ordering = ('-publish',)
         verbose_name_plural = "Theses"
+
         
     def get_absolute_url(self):
         return reverse('search:thesis_detail',

@@ -1,17 +1,27 @@
 {% extends "search/base.html" %}
     {% block title %}Search Engine{% endblock %}
 {% block content %}
-    <h1>Search Theses</h1>
-    {% for thesis in theses %}
-        <h2>
-            <a href="{{ thesis.get_absolute_url }}">
-            {{ thesis.title }}
-            </a>
-        </h2>
-        <p class="date">
-        Published {{ thesis.publish }} by {{ thesis.posted_by }}
-        </p>
-        {{ thesis.abstract|truncatewords:30|linebreaks }}
-    {% endfor %}
+
+    <div class="search-header">
+        <form class="search" method='GET' action=''>
+              <input type="text" placeholder="Find a thesis.." name="q" value="{{request.GET.q}}">
+              <button type="submit" name='search'>Search</button>
+        </form>
+        <h1>Theses List</h1>
+    </div>
+    <div class="thesis-list">
+        {% for thesis in theses %}
+            <h2>
+                <a href="{{ thesis.get_absolute_url }}">
+                {{ thesis.title }}
+                </a>
+            </h2>
+            <p class="date">
+            Posted {{ thesis.publish }} by {{ thesis.posted_by }}
+            </p>
+            {{ thesis.abstract|truncatewords:40|linebreaks }}
+        {% endfor %}
+    </div>
+    <br>
     {% include "pagination.html" with page=theses %}
 {% endblock %}

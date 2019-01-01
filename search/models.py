@@ -28,10 +28,9 @@ class Thesis(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10,
                 choices=STATUS_CHOICES,
-                default='draft')
+                    default='draft')
     objects = models.Manager()
     published = PublishedManager()
-    exclude = ['posted_by',]
 
     class Meta:
         ordering = ('-publish',)

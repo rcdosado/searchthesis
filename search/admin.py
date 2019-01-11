@@ -3,7 +3,8 @@ from search.models import Thesis , Comment
 
 @admin.register(Thesis)
 class ThesisAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'authors','posted_by','adviser','publish','status')
+    list_display = ('title', 'authors','posted_by','adviser','publish','status')
+    list_editable = ('status',)
     list_filter = ('status', 'created', 'publish', 'posted_by')
     search_fields = ('title', 'abstract')
     prepopulated_fields = {'slug':('title',)}

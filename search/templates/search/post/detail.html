@@ -6,8 +6,13 @@
         Author(s): {{ thesis.authors }}
     </h6>
     <p class="date">
-        Published {{ thesis.publish }} by {{ thesis.posted_by }}
+        published {{ thesis.publish }} by {{ thesis.posted_by }}
     </p>
+    {% if thesis.adviser %}
+    <p class="date">Adviser : {{thesis.adviser.last_name }}, {{ thesis.adviser.first_name }}</p>
+    {% else %}
+    <p class="date">Adviser : Not Specified</p>
+    {% endif %}
     <h3>Abstract</h3>
     <p class="justify">
         {{ thesis.abstract }}

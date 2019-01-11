@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from search.models import Thesis 
+from search.models import Thesis , Comment
 
 @admin.register(Thesis)
 class ThesisAdmin(admin.ModelAdmin):
@@ -16,3 +15,9 @@ class ThesisAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
     	obj.posted_by = request.user
     	super().save_model(request, obj, form, change)
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'body','created', 'active')
+    list_filter = ('active', 'created', 'updated')
+    search_fields = ('body',)

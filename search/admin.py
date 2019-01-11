@@ -3,8 +3,7 @@ from search.models import Thesis , Comment
 
 @admin.register(Thesis)
 class ThesisAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'authors','posted_by','publish',
-                    'status')
+    list_display = ('title', 'slug', 'authors','posted_by','adviser','publish','status')
     list_filter = ('status', 'created', 'publish', 'posted_by')
     search_fields = ('title', 'abstract')
     prepopulated_fields = {'slug':('title',)}
@@ -20,4 +19,5 @@ class ThesisAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('user', 'body','created', 'active')
     list_filter = ('active', 'created', 'updated')
+    list_editable = ('active',)
     search_fields = ('body',)

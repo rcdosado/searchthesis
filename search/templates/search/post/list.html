@@ -1,4 +1,5 @@
 {% extends "search/base.html" %}
+{% load humanize %}
     {% block title %}Search Engine{% endblock %}
 {% block content %}
 
@@ -18,7 +19,7 @@
                 </a>
             </h2>
             <p class="date">
-            Posted {{ thesis.publish }} by {{ thesis.posted_by }}
+            Posted {{ thesis.publish|naturaltime }} by {{ thesis.posted_by }}
             </p>
             {{ thesis.abstract|truncatewords:40|linebreaks }}
         {% endfor %}

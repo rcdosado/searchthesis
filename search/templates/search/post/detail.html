@@ -1,4 +1,5 @@
 {% extends "search/base.html" %}
+{% load humanize %}
     {% block title %}Detail of the Thesis{% endblock %}
     {% block content %}
     <h1 class="title">
@@ -34,7 +35,7 @@
         <div class="comment">
             <p class="info">
             Comment by {{ comment.user }}
-                {{ comment.created }}
+                {{ comment.created | naturaltime }}
             </p>
                 {{ comment.body|linebreaks }}
         </div>

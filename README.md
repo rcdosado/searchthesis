@@ -36,6 +36,18 @@ simple thesis search engine for PSU Computer Studies (internal use only)
 8.  Go to localhost:8000/admin, login, then fill the system with information
 9.  Browse localhost:8000/search/ to see public search page
 
+# Backing up data
+
+After encoding thesis information, you can back up your database by issuing
+```batch
+>python manage.py dumpdata search > db.json
+```
+after which when deploying in another computer, you can restore those information by issuing
+```batch
+>python manage.py loaddata db.json
+```
+if you want to restore user information and more, consult the Django official docs.
+
 # Todo
  * export
  * landing page

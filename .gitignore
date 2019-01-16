@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 db.sqlite3
 *.pyc
-=======
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -106,4 +104,4 @@ venv.bak/
 
 # mypy
 .mypy_cache/
->>>>>>> 28a6ab983c685252a87af5db2dc378c15d0ec90e
+

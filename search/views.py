@@ -7,7 +7,6 @@ from django.db.models import Q
 from searchthesis.settings import PAGINATION_PER_PAGE
 from .models import Thesis, Comment
 from .forms import CommentForm
-from django.contrib.auth.models import AnonymousUser
 
 
 def thesis_list(request):

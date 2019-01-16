@@ -24,6 +24,7 @@ h2 {
     margin:30px 0 0;
 }
 h6.author {
+    font-size:14px;
     margin-top: 0;
     margin-bottom: 0;
     color:#ccc;
@@ -63,6 +64,10 @@ p.date {
     font-style: italic; 
     margin-bottom: 0;
     margin-top:0;
+}
+p.tags {
+    font-size:12px;
+    color:"red";
 }
 
 /* pagination */

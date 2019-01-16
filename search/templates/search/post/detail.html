@@ -1,8 +1,13 @@
 {% extends "search/base.html" %}
     {% block title %}Detail of the Thesis{% endblock %}
     {% block content %}
-    <h1 class="title">{{ thesis.title }}</h1>
-        <h6 class="author">
+    <h1 class="title">
+        {{ thesis.title }}
+    </h1>
+    <p class="tags">
+        <b>Tags:</b> <i>{{thesis.tags.all|join:", "}}</i>
+    </p>
+    <h6 class="author">
         Author(s): {{ thesis.authors }}
     </h6>
     <p class="date">
@@ -25,7 +30,7 @@
     {% for comment in comments %}
         <div class="comment">
             <p class="info">
-            Comment {{ forloop.counter }} by {{ comment.user }}
+            Comment by {{ comment.user }}
                 {{ comment.created }}
             </p>
                 {{ comment.body|linebreaks }}

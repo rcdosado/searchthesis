@@ -16,7 +16,7 @@ class Thesis(models.Model):
         ('draft','Draft'),
         ('published', 'Published'),
     )
-    title = models.CharField(max_length=250)
+    title = models.CharField(max_length=250,unique=True)
     slug = models.SlugField(max_length=250, 
                 unique_for_date='publish')
     abstract = models.TextField()

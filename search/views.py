@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect
 from django.db.models import Q
 
 
@@ -53,9 +54,13 @@ def thesis_detail(request, year, month, day, thesis):
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
             new_comment.post = thesis 
+            if current_user:
+                new_comment.user = current_user
             new_comment.save()
+            return redirect(thesis)
     else:
         comment_form = CommentForm()
+    # import pdb; pdb.set_trace()
     return render(request,
                     'search/post/detail.html',
                     {'thesis':thesis,

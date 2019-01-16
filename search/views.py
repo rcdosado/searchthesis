@@ -20,6 +20,10 @@ def thesis_list(request):
                 Q(abstract__icontains=query) |
                 Q(authors__icontains=query) 
                 ).order_by('-publish')
+    tagged = request.GET.get('tagged')
+    if tagged:
+        object_list = Thesis.objects.filter(tags__name__in=[tagged])
+    # import pdb; pdb.set_trace()
     paginator = Paginator(object_list, PAGINATION_PER_PAGE)
     page = request.GET.get('page')
     try:

@@ -5,7 +5,10 @@
         {{ thesis.title }}
     </h1>
     <p class="tags">
-        <b>Tags:</b> <i>{{thesis.tags.all|join:", "}}</i>
+        <b>Tags:</b>
+        {% for tag in thesis.tags.all %}
+            <a href="{% url 'thesis-search:thesis_list' %}?tagged={{tag}}"><i>{{tag}}</i></a>
+        {% endfor %}
     </p>
     <h6 class="author">
         Author(s): {{ thesis.authors }}

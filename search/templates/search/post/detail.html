@@ -26,6 +26,16 @@
     <p class="justify">
         {{ thesis.abstract }}
     </p>
+    <h3>Similar Thesis</h3>
+    <div class="similar-thesis">
+        {% for thesis in similar_thesis %}
+            <p>
+                <a href="{{ thesis.get_absolute_url }}">{{ thesis.title }}</a>
+            </p>
+        {% empty %}
+            There are no similar thesis yet.
+        {% endfor %}
+    </div>
     {% with comments.count as total_comments %}
     <h2>
         {{ total_comments }} comment{{ total_comments|pluralize }}

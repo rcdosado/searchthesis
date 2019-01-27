@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
-from django.db.models import Q
+from django.db.models import Q, Count
 from taggit.models import Tag
 
 from searchthesis.settings import PAGINATION_PER_PAGE
@@ -67,6 +67,11 @@ def thesis_detail(request, year, month, day, thesis):
             return redirect(thesis)
     else:
         comment_form = CommentForm()
+    thesis_tags_ids = thesis.tags.values_list('id', flat=True)
+    similar_thesis = Thesis.published.filter(tags__in=thesis_tags_ids)\
+                                     .exclude(id=thesis.id) 
+    similar_thesis = similar_thesis.annotate(same_tags=Count('tags'))\
+                                   .order_by('-same_tags', '-publish')[:4]
     # import pdb; pdb.set_trace()
     return render(request,
                     'search/post/detail.html',
@@ -74,4 +79,5 @@ def thesis_detail(request, year, month, day, thesis):
                      'comments':comments,
                      'current_user':current_user,
                      'new_comment':new_comment,
-                     'comment_form':comment_form})
+                     'comment_form':comment_form,
+                     'similar_thesis': similar_thesis})

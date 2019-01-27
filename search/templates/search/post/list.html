@@ -17,6 +17,15 @@
                 <a href="{{ thesis.get_absolute_url }}">
                 {{ thesis.title }}
                 </a>
+                <p class="tags">
+                Tags: 
+                {% for tag in thesis.tags.all %}
+                    <a href="{% url "thesis-search:post_list_by_tag" tag.slug %}">
+                        {{tag}}
+                    </a>
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                </p>
             </h2>
             <p class="date">
             Posted {{ thesis.publish|naturaltime }} by {{ thesis.posted_by }}

@@ -2,14 +2,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.db.models import Q
-
+from taggit.models import Tag
 
 from searchthesis.settings import PAGINATION_PER_PAGE
 from .models import Thesis, Comment
 from .forms import CommentForm
 
 
-def thesis_list(request):
+def thesis_list(request, tag_slug=None):
     object_list = Thesis.published.all()
     if request.method == 'POST':
         query = request.POST.get("q")
@@ -19,9 +19,13 @@ def thesis_list(request):
                 Q(abstract__icontains=query) |
                 Q(authors__icontains=query) 
                 ).order_by('-publish')
-    tagged = request.GET.get('tagged')
-    if tagged:
-        object_list = Thesis.objects.filter(tags__name__in=[tagged])
+            # import pdb; pdb.set_trace()
+
+    tag = None 
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        object_list = object_list.filter(tags__in=[tag])
+
     # import pdb; pdb.set_trace()
     paginator = Paginator(object_list, PAGINATION_PER_PAGE)
     page = request.GET.get('page')

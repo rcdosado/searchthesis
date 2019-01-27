@@ -132,7 +132,7 @@ form.search::after {
     clear:both;
     padding-left:10px; 
 }
-#latest-posts{
+.latest-posts{
   padding-left:20px;
 }
 /*

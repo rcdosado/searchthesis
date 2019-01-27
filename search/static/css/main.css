@@ -132,7 +132,14 @@ form.search::after {
     clear:both;
     padding-left:10px; 
 }
+.similar-thesis{
+  margin-left:15px;
+}
+.similar-thesis > p{
+  margin-top: 5px;
+  margin-bottom:5px;
 
+}
 /* comments */
 .comment {
     padding:10px;

@@ -1,3 +1,4 @@
+{% load thesis_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +13,9 @@
     <div id="sidebar">
         <h2><a href="{% url 'thesis-search:thesis_list' %}">Thesis Search</a></h2>
             <p>Computer Studies Thesis </br>Search Engine.</p>
+            <p>Total titles : {% total_posts %}</p>
+        <h3>Latest posts</h3>
+        {% show_latest_posts 3 %}
     </div>
     <div id="content">
         {% block content %}

@@ -132,6 +132,12 @@ form.search::after {
     clear:both;
     padding-left:10px; 
 }
+#latest-posts{
+  padding-left:20px;
+}
+/*
+  similar thesis design
+*/
 .similar-thesis{
   margin-left:15px;
 }

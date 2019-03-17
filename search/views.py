@@ -5,7 +5,7 @@ from django.db.models import Q, Count
 from taggit.models import Tag
 
 from searchthesis.settings import PAGINATION_PER_PAGE
-from .models import Thesis, Comment
+from .models import Thesis, Comment, PublishedManager
 from .forms import CommentForm
 
 
@@ -14,7 +14,7 @@ def thesis_list(request, tag_slug=None):
     if request.method == 'POST':
         query = request.POST.get("q")
         if query:
-            object_list=Thesis.objects.filter(
+            object_list=Thesis.published.filter(
                 Q(title__icontains=query) |
                 Q(abstract__icontains=query) |
                 Q(authors__icontains=query) 

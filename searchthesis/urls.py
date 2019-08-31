@@ -22,4 +22,5 @@ urlpatterns = [
     path('', lambda request: redirect('search/', permanent=False)),
     path('admin/', admin.site.urls),
     path('search/',include('search.urls',namespace='thesis-search')),
+    path('explorer/',include('explorer.urls')),    
 ]

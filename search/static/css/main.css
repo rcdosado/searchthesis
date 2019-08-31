@@ -23,11 +23,11 @@ h2 {
     font-weight:normal;
     margin:30px 0 0;
 }
-h6.author {
-    font-size:14px;
-    margin-top: 0;
-    margin-bottom: 0;
-    color:#ccc;
+
+h6.meta {
+    font-weight: normal;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 #content { 
     float:left;

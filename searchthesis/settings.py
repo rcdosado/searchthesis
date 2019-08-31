@@ -25,7 +25,7 @@ SECRET_KEY = 'a^4#-)$qt#oukqq1rm!xd^&14h&0c5x=x&_r@)v_fq@6a-achm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.200','localhost', '192.168.1.6', "raspberrypi"]
+ALLOWED_HOSTS = ['localhost', '192.168.1.4']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'search.apps.SearchConfig',
     'taggit',
+    'explorer',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +81,13 @@ WSGI_APPLICATION = 'searchthesis.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'djdb',
+        'USER': 'admin',
+        'PASSWORD': 'passwordhere',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+      
     }
 }
 
@@ -104,6 +110,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+EXPLORER_CONNECTIONS = {'default': 'default'}
+EXPLORER_DEFAULT_CONNECTION = 'default'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

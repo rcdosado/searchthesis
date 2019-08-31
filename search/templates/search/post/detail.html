@@ -5,23 +5,26 @@
     <h1 class="title">
         {{ thesis.title }}
     </h1>
-    <p class="tags">
+    <h6 class="meta">
         <b>Tags:</b>
         {% for tag in thesis.tags.all %}
-            <a href="{% url 'thesis-search:post_list_by_tag' tag.slug %}"><i>{{tag}}</i></a>
-        {% endfor %}
-    </p>
-    <h6 class="author">
-        Author(s): {{ thesis.authors }}
+            <a href="{% url 'thesis-search:post_list_by_tag' tag.slug %}"><i>{{tag}}{% if not forloop.last %}, {% endif %}</i></a>
+        {% endfor %}                   
+    <br>
     </h6>
-    <p class="date">
-        published {{ thesis.publish }} by {{ thesis.posted_by }}
-    </p>
-    {% if thesis.adviser %}
-    <p class="date">Adviser : {{thesis.adviser.last_name }}, {{ thesis.adviser.first_name }}</p>
+    <h6 class="meta">
+        <b>Author(s):</b> {{ thesis.authors }}
+    </h6>
+    <h6 class="meta">
+        <b>Published:</b> {{ thesis.publish }} by {{ thesis.posted_by }}
+    </h6>
+    
+    {% if thesis.adviser.lastname or thesis.adviser.first_name %}
+        <h6 class="meta"><b>Adviser: </b><a href="#">{{thesis.adviser.last_name }}, {{ thesis.adviser.first_name }}</a></h6>
     {% else %}
-    <p class="date">Adviser : Not Specified</p>
+        <h6 class="meta"><b>Adviser: </b> <a href="#">{{thesis.adviser}}</a></h6>
     {% endif %}
+
     <h3>Abstract</h3>
     <p class="justify">
         {{ thesis.abstract }}
@@ -30,7 +33,7 @@
     <div class="similar-thesis">
         {% for thesis in similar_thesis %}
             <p>
-                <a href="{{ thesis.get_absolute_url }}">{{ thesis.title }}</a>
+                <a href="{{ thesis.get_absolute_url }}">{{ thesis.title }} {% if not forloop.last %}, {% endif %}</a>
             </p>
         {% empty %}
             There are no similar thesis yet.
@@ -52,12 +55,15 @@
         {% empty %}
             <p>There are no comments yet.</p>
     {% endfor %} 
-    <h2>Add a new comment</h2>
-    <form action="." method="post">
-        {% csrf_token %}
-        <p>User: <small>{{current_user}}</small></p>
-        {{ comment_form.body }}
-        {% csrf_token %}
-        <p><input type="submit" value="Add comment"></p>
-    </form>
+
+    {% ifnotequal current_user None %}
+        <h2>Add a new comment</h2>
+        <form action="." method="post">
+            {% csrf_token %}
+            <p>User: <small>{{current_user}}</small></p>
+            {{ comment_form.body }}
+            {% csrf_token %}
+            <p><input type="submit" value="Add comment"></p>
+        </form>
+    {% endifnotequal %}
 {% endblock %}

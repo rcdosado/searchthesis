@@ -35,17 +35,21 @@ def thesis_list(request, tag_slug=None):
         theses = paginator.page(1)
     except EmptyPage:
         theses = paginator.page(paginator.num_pages)
+    # import pdb; pdb.set_trace()
+    size = len(theses)
     return render(request,
                 'search/post/list.html',
                 {'page':page,
-                 'theses':theses})
+                 'theses':theses,
+                 'size':size})
 
 def thesis_detail(request, year, month, day, thesis):
+    # import pdb; pdb.set_trace()
     thesis = get_object_or_404(Thesis, slug=thesis,
                                    status='published',
-                                   publish__year=year,
-                                   publish__month=month,
-                                   publish__day=day)
+                                   publish__year=year)
+                                   # publish__month=month,
+                                   # publish__day=day)
     # list of active comments for this thesis
     comments = thesis.comments.filter(active=True)
 
@@ -72,7 +76,6 @@ def thesis_detail(request, year, month, day, thesis):
                                      .exclude(id=thesis.id) 
     similar_thesis = similar_thesis.annotate(same_tags=Count('tags'))\
                                    .order_by('-same_tags', '-publish')[:4]
-    # import pdb; pdb.set_trace()
     return render(request,
                     'search/post/detail.html',
                     {'thesis':thesis,
